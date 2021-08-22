@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "1172aaa2-b8e0-4f12-b336-78c3c4026ad6",
+		"name": "FieldLevel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetRecentPosts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:18732/API/GetRecentPosts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18732",
+					"path": [
+						"API",
+						"GetRecentPosts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
