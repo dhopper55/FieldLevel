@@ -38,3 +38,6 @@ C:\Github\FieldLevel\obj\Debug\net5.0\FieldLevel.dll
 C:\Github\FieldLevel\obj\Debug\net5.0\ref\FieldLevel.dll
 C:\Github\FieldLevel\obj\Debug\net5.0\FieldLevel.pdb
 C:\Github\FieldLevel\obj\Debug\net5.0\FieldLevel.genruntimeconfig.cache
+C:\Github\FieldLevel\bin\Debug\net5.0\FieldLevel.postman_collection.json
+C:\Github\FieldLevel\obj\Debug\net5.0\Razor\Views\Home\Test.cshtml.g.cs
+C:\Github\FieldLevel\obj\Debug\net5.0\Razor\Views\Home\Test2.cshtml.g.cs

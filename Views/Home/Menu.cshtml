@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">FieldLevel User Post View!</h1>
+    <p>Check below to see the latest post from each user...</p>
+</div>
+
+<hr />
+
+<div id="divSpinner" style="text-align: center;">
+    <img alt="" src="~/images/Fidget-spinner.gif" />
+</div>
+
+<br />
+<br />
+
+<div id="divUserPosts" style="display: none; text-align: center;">
+    <button type="button" class="btn btn-primary" onclick="javascript:ShowPost(1);">
+        User 1: The Title 1!
+    </button>
+    <input id="hdnUserName1" type="hidden" value="User 1" />
+    <input id="hdnTitle1" type="hidden" value="The Title 1!" />
+    <input id="hdnPost1" type="hidden" value="Post 1!!" />
+    <br /><br />
+</div>
+
+<div style="text-align: center;">
+    <button type="button" class="btn btn-warning" onclick="javascript:RefreshPosts();">
+        Refresh
+    </button>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <p>Modal body text goes here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        RefreshPosts();
+    });
+
+    function RefreshPosts() {
+        $("#divUserPosts").hide();
+        $("#divSpinner").show();
+
+        setTimeout(RefreshPostsInner, 1000);
+    }
+
+    function RefreshPostsInner() {
+         $.ajax({
+            type: 'GET',
+            url: '@Url.Content("~/API/GetRecentPosts")',
+            data: null,
+            success: function (data) {
+                LoadPostDiv(data);
+            }
+        });
+    }
+
+    function LoadPostDiv(data) {
+        $('#divUserPosts').html("");
+
+        var divHTML = "";
+        for (var i = 0; i < data.length; i++) {
+            divHTML = divHTML + GetPostHTML(data[i]);
+        }
+
+        $('#divUserPosts').html(divHTML);
+        $("#divUserPosts").show();
+        $("#divSpinner").hide();
+    }
+
+    function GetPostHTML(dataObject) {
+        var retHTML = "<button type=\"button\" class=\"btn btn-primary\" onclick=\"javascript:ShowPost(" + dataObject.id + ");\">";
+        retHTML = retHTML + dataObject.title;
+        retHTML = retHTML + "</button>";
+        retHTML = retHTML + "<input id=\"hdnUserName" + dataObject.id + "\" type=\"hidden\" value=\"User " + dataObject.userId + "\" />";
+        retHTML = retHTML + "<input id=\"hdnTitle" + dataObject.id + "\" type=\"hidden\" value=\"" + dataObject.title + "\" />";
+        retHTML = retHTML + "<input id=\"hdnPost" + dataObject.id + "\" type=\"hidden\" value=\"" + dataObject.body + "\" />";
+        retHTML = retHTML + "<br /><br />";
+
+        return retHTML;
+    }
+
+    function ShowPost(postNum) {
+
+        var modalTitle = $('#hdnUserName' + postNum).val() + ' - ' + $('#hdnTitle' + postNum).val();
+        $('#modalTitle').text(modalTitle);
+
+        $('#modalBody').html("<p>" + $('#hdnPost' + postNum).val() + "</p>");
+
+        $('#myModal').modal('show');
+    }
+
+</script>

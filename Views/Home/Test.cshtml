@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    HEY THERE!
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        //alert(generateNewFolderName(["New Folder", "New Folder (2)", "New Folder (3)"]));
+    });
+
+    function generateNewFolderName(existingFolders) {
+        var folderToFind = 0;
+        var retFolderName = "New Folder";
+        var folderNum = 2;
+        for (; ;) {
+            if (existingFolders.includes(retFolderName) == false)
+                break;
+            else {
+                retFolderName = "New Folder (" + folderNum + ")";
+                folderNum += 1;
+            }
+        }
+
+        return retFolderName;
+    }
+
+</script>
